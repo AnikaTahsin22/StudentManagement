@@ -19,7 +19,8 @@ class StudentTest {
 
     @BeforeEach
     void setUp() {
-        student =new Student("anika",60,60,60);
+
+        student =new Student("samiha",50,70,45);
 
     }
 
@@ -31,11 +32,23 @@ class StudentTest {
 
     @Test
     void  testTotalMarks() {
-        assertEquals(190, student.totalMarks(),"total marks should be 180");
+        student =new Student("anika",60,60,60);
+        assertEquals(180, student.totalMarks(),"total marks should be 180");
+
     }
 
     @Test
     void testAverageMarks() {
+        assertEquals(55.0,student.averageMarks(),"Average marks should be 55.0");
 
+    }
+
+    @Test
+    void  testGradeShouldNotBeNull() {
+        String grade=student.getGrade();
+        if (grade==null){
+            fail("Grade should not be null for a valid student");
+        }
+        assertNotNull(grade);
     }
 }
