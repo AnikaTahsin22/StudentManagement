@@ -16,7 +16,7 @@ public class StudentManagerUI extends JFrame {
     private final String FILE_NAME = "students.json";
 
     public StudentManagerUI() {
-        setTitle("Student Manager");
+        setTitle(" Student Manager");
         setSize(1000, 600);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
@@ -71,7 +71,7 @@ public class StudentManagerUI extends JFrame {
         addPlaceholder(englishField, "English marks");
         addPlaceholder(mathField, "Math marks");
 
-        JButton addButton = createFancyButton("Add Student", new Color(72, 201, 176));
+        JButton addButton = createFancyButton(" Add Student", new Color(72, 201, 176));
         addButton.addActionListener(this::addStudent);
 
         // Horizontal layout: labels and inputs aligned left, button centered
@@ -201,7 +201,7 @@ public class StudentManagerUI extends JFrame {
         JButton button = new JButton(text);
         button.setFont(new Font("Segoe UI Semibold", Font.BOLD, 14));
         button.setFocusPainted(false);
-        button.setForeground(Color.BLACK);    // changed to black text
+        button.setForeground(Color.BLACK);
         button.setBackground(baseColor);
         button.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         button.setBorder(new RoundedBorder(15));
@@ -243,7 +243,7 @@ public class StudentManagerUI extends JFrame {
             int math = Integer.parseInt(mathField.getText().trim());
 
             manager.addStudent(name, bangla, english, math);
-            outputArea.append("✅ Added student: " + name + "\n");
+            outputArea.append("Added student: " + name + "\n");
             updateTable();
 
             // Clear fields after adding
@@ -281,7 +281,7 @@ public class StudentManagerUI extends JFrame {
 
     private void saveStudents() {
         manager.saveToFile(FILE_NAME);
-        outputArea.append(" Saved to " + FILE_NAME + "\n");
+        outputArea.append("Saved to " + FILE_NAME + "\n");
     }
 
     private void loadStudents() {
