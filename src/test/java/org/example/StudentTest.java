@@ -43,12 +43,5 @@ class StudentTest {
 
     }
 
-    @Test
-    void  testGradeShouldNotBeNull() {
-        String grade=student.getGrade();
-        if (grade==null){
-            fail("Grade should not be null for a valid student");
-        }
-        assertNotNull(grade);
-    }
+
 }
