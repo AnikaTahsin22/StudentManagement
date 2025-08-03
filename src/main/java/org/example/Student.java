@@ -7,11 +7,18 @@ public class Student {
     private int math;
 
     public Student(String name, int bangla, int english, int math) {
+//        if (bangla < 0 || english < 0 || math < 0) {
+//            throw new IllegalArgumentException("Marks cannot be negative");
+//        }
+
         this.name = name;
         this.bangla = bangla;
         this.english = english;
         this.math = math;
     }
+
+
+
 
     public String getName() {
         return name;

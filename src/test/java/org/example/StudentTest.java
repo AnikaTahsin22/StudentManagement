@@ -43,5 +43,30 @@ class StudentTest {
 
     }
 
+    @Test
+    void testFail1() {
+        Student student= new Student("Mahi",-10,40,50);
+        if(student.getBangla()<0){
+            fail("Bangla marks should not be negative");
+        }
+
+    }
+    @Test
+    void testFail2() {
+        Student student= new Student("Mahi",-10,-40,-50);
+        if(student.averageMarks()<0){
+            fail("Average marks should not be negative");
+        }
+
+    }
+
+    @Test
+    void testGrade() {
+       Student student1 =new Student("Tashnim",80,83,75);
+        Student student2 = new Student("Anika", 30, 35, 20);
+        assertEquals("A",student1.getGrade(),"Grade should be A");
+        assertEquals("F", student2.getGrade(), "Grade should be F");
+    }
+
 
 }
