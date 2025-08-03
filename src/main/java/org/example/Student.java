@@ -28,4 +28,20 @@ public class Student {
     public void setBangla(int bangla) {
         this.bangla = bangla;
     }
+
+    public int getEnglish() {
+        return english;
+    }
+
+    public void setEnglish(int english) {
+        this.english = english;
+    }
+
+    public int getMath() {
+        return math;
+    }
+
+    public void setMath(int math) {
+        this.math = math;
+    }
 }
