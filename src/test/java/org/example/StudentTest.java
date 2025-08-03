@@ -62,11 +62,13 @@ class StudentTest {
 
     @Test
     void testGrade() {
-       Student student1 =new Student("Tashnim",80,83,75);
+        Student student1 = new Student("Tashnim", 80, 83, 75);
         Student student2 = new Student("Anika", 30, 35, 20);
-        assertEquals("A",student1.getGrade(),"Grade should be A");
+        assertEquals("A", student1.getGrade(), "Grade should be A");
         assertEquals("F", student2.getGrade(), "Grade should be F");
+        assertNotEquals("A+", student1.getGrade(), "Grade is not A+");
     }
+
 
 
 }
