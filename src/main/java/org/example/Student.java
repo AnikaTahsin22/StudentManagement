@@ -37,14 +37,14 @@ public class Student {
     public double averageMarks() {
         return totalMarks() / 3.0;
     }
-    public  String getGrade(){
+    public String getGrade() {
         double marks = averageMarks();
         if (marks >= 80.0) return "A+";
-        else if (marks >=70.0) return "A";
-        else if (marks >=60.0) return "B";
-        else if (marks >=50.0) return "C";
-        else if (marks >=40.0) return "D";
-        else return  "F";
+        else if (marks >= 70.0) return "A";
+        else if (marks >= 60.0) return "B";
+        else if (marks >= 50.0) return "C";
+        else if (marks >= 40.0) return "D";
+        else return "F";
     }
 
 }
