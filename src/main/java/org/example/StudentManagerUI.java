@@ -111,4 +111,4 @@ public class StudentManagerUI extends JFrame {
         );
 
         return panel;
-    }
+    }}
