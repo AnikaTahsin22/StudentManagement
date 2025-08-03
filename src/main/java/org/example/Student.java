@@ -17,31 +17,30 @@ public class Student {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
+
 
     public int getBangla() {
         return bangla;
     }
 
-    public void setBangla(int bangla) {
-        this.bangla = bangla;
-    }
 
     public int getEnglish() {
         return english;
     }
 
-    public void setEnglish(int english) {
-        this.english = english;
-    }
+
 
     public int getMath() {
         return math;
     }
 
-    public void setMath(int math) {
-        this.math = math;
+
+    public int totalMarks(){
+        return bangla+english +math;
+
     }
+    public  double averageMarks(){
+        return totalMarks()/3.0;
+    }
+
 }
