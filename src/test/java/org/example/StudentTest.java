@@ -8,26 +8,18 @@ class StudentTest {
     @BeforeAll
     static void beforeAll() {
         System.out.println("Before all test");
-
     }
-
     @AfterAll
     static void afterAll() {
         System.out.println("After all test");
-
     }
-
     @BeforeEach
     void setUp() {
-
         student =new Student("samiha",50,70,45);
-
     }
-
     @AfterEach
     void tearDown() {
         System.out.println("After each test");
-
     }
 
     @Test
