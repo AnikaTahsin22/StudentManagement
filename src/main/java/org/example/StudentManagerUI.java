@@ -111,4 +111,55 @@ public class StudentManagerUI extends JFrame {
         );
 
         return panel;
-    }}
+    }
+
+    private JPanel createRecordsPanel() {
+        JPanel panel = new JPanel(new BorderLayout(10, 10));
+        panel.setBorder(new EmptyBorder(10, 10, 10, 10));
+
+        // Table setup
+        String[] columns = {"Name", "Bangla", "English", "Math", "Total", "Average", "Grade"};
+        tableModel = new DefaultTableModel(columns, 0);
+        studentTable = new JTable(tableModel);
+        studentTable.setRowHeight(28);
+        studentTable.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        studentTable.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 15));
+
+        JScrollPane tableScroll = new JScrollPane(studentTable);
+        tableScroll.setBorder(createRoundedTitledBorder("📋 Student Records"));
+
+        // Buttons Panel with hover effects
+        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 20, 15));
+        buttonPanel.setBackground(new Color(225, 235, 250));
+
+        JButton highestButton = createFancyButton(" Highest Marks", new Color(100, 149, 237));
+        JButton topperButton = createFancyButton(" Show Topper", new Color(100, 149, 237));
+        JButton saveButton = createFancyButton("Save", new Color(100, 149, 237));
+        JButton loadButton = createFancyButton(" Load", new Color(100, 149, 237));
+
+        highestButton.addActionListener(this::showHighest);
+        topperButton.addActionListener(this::showTopper);
+        saveButton.addActionListener(e -> saveStudents());
+        loadButton.addActionListener(e -> loadStudents());
+
+        buttonPanel.add(highestButton);
+        buttonPanel.add(topperButton);
+        buttonPanel.add(saveButton);
+        buttonPanel.add(loadButton);
+
+        // Output area with rounded border
+        outputArea = new JTextArea(5, 50);
+        outputArea.setEditable(false);
+        outputArea.setFont(new Font("Consolas", Font.PLAIN, 14));
+        outputArea.setBorder(createRoundedTitledBorder(" Output Log"));
+
+        JScrollPane outputScroll = new JScrollPane(outputArea);
+        outputScroll.setPreferredSize(new Dimension(950, 130));
+
+        panel.add(buttonPanel, BorderLayout.NORTH);
+        panel.add(tableScroll, BorderLayout.CENTER);
+        panel.add(outputScroll, BorderLayout.SOUTH);
+
+        return panel;
+    }
+}
