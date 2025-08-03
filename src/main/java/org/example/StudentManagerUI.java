@@ -16,7 +16,7 @@ public class StudentManagerUI extends JFrame {
     private final String FILE_NAME = "students.json";
 
     public StudentManagerUI() {
-        setTitle("📚 Student Manager");
+        setTitle("Student Manager");
         setSize(1000, 600);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
@@ -32,8 +32,8 @@ public class StudentManagerUI extends JFrame {
         // Student Records Tab (Table + Output log)
         JPanel recordsPanel = createRecordsPanel();
 
-        tabbedPane.addTab("➕ Add Student", addStudentPanel);
-        tabbedPane.addTab("📋 Student Records", recordsPanel);
+        tabbedPane.addTab(" Add Student", addStudentPanel);
+        tabbedPane.addTab(" Student Records", recordsPanel);
 
         add(tabbedPane);
     }
@@ -71,7 +71,7 @@ public class StudentManagerUI extends JFrame {
         addPlaceholder(englishField, "English marks");
         addPlaceholder(mathField, "Math marks");
 
-        JButton addButton = createFancyButton("➕ Add Student", new Color(72, 201, 176));
+        JButton addButton = createFancyButton("Add Student", new Color(72, 201, 176));
         addButton.addActionListener(this::addStudent);
 
         // Horizontal layout: labels and inputs aligned left, button centered
@@ -113,6 +113,7 @@ public class StudentManagerUI extends JFrame {
         return panel;
     }
 
+
     private JPanel createRecordsPanel() {
         JPanel panel = new JPanel(new BorderLayout(10, 10));
         panel.setBorder(new EmptyBorder(10, 10, 10, 10));
@@ -132,10 +133,10 @@ public class StudentManagerUI extends JFrame {
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 20, 15));
         buttonPanel.setBackground(new Color(225, 235, 250));
 
-        JButton highestButton = createFancyButton(" Highest Marks", new Color(100, 149, 237));
-        JButton topperButton = createFancyButton(" Show Topper", new Color(100, 149, 237));
-        JButton saveButton = createFancyButton("Save", new Color(100, 149, 237));
-        JButton loadButton = createFancyButton(" Load", new Color(100, 149, 237));
+        JButton highestButton = createFancyButton("📊 Highest Marks", new Color(100, 149, 237));
+        JButton topperButton = createFancyButton("🏆 Show Topper", new Color(100, 149, 237));
+        JButton saveButton = createFancyButton("💾 Save", new Color(100, 149, 237));
+        JButton loadButton = createFancyButton("📂 Load", new Color(100, 149, 237));
 
         highestButton.addActionListener(this::showHighest);
         topperButton.addActionListener(this::showTopper);
@@ -151,7 +152,7 @@ public class StudentManagerUI extends JFrame {
         outputArea = new JTextArea(5, 50);
         outputArea.setEditable(false);
         outputArea.setFont(new Font("Consolas", Font.PLAIN, 14));
-        outputArea.setBorder(createRoundedTitledBorder(" Output Log"));
+        outputArea.setBorder(createRoundedTitledBorder("📄 Output Log"));
 
         JScrollPane outputScroll = new JScrollPane(outputArea);
         outputScroll.setPreferredSize(new Dimension(950, 130));
@@ -161,5 +162,183 @@ public class StudentManagerUI extends JFrame {
         panel.add(outputScroll, BorderLayout.SOUTH);
 
         return panel;
+    }
+
+    private JLabel createLabel(String text, Font font) {
+        JLabel label = new JLabel(text);
+        label.setFont(font);
+        return label;
+    }
+
+    private void setSystemLookAndFeel() {
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch (Exception ignored) {}
+    }
+
+    private void addPlaceholder(JTextField textField, String placeholder) {
+        textField.setForeground(Color.GRAY);
+        textField.setText(placeholder);
+
+        textField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent e) {
+                if (textField.getText().equals(placeholder)) {
+                    textField.setText("");
+                    textField.setForeground(Color.BLACK);
+                }
+            }
+
+            public void focusLost(java.awt.event.FocusEvent e) {
+                if (textField.getText().isEmpty()) {
+                    textField.setForeground(Color.GRAY);
+                    textField.setText(placeholder);
+                }
+            }
+        });
+    }
+
+    private JButton createFancyButton(String text, Color baseColor) {
+        JButton button = new JButton(text);
+        button.setFont(new Font("Segoe UI Semibold", Font.BOLD, 14));
+        button.setFocusPainted(false);
+        button.setForeground(Color.BLACK);    // changed to black text
+        button.setBackground(baseColor);
+        button.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        button.setBorder(new RoundedBorder(15));
+        button.setOpaque(true);
+        button.setContentAreaFilled(true);
+
+        // Hover effect
+        button.addMouseListener(new MouseAdapter() {
+            public void mouseEntered(MouseEvent e) {
+                button.setBackground(baseColor.darker());
+            }
+            public void mouseExited(MouseEvent e) {
+                button.setBackground(baseColor);
+            }
+        });
+
+        return button;
+    }
+
+    private Border createRoundedTitledBorder(String title) {
+        return BorderFactory.createCompoundBorder(
+                BorderFactory.createTitledBorder(
+                        BorderFactory.createLineBorder(new Color(100, 149, 237), 2, true),
+                        title,
+                        TitledBorder.LEADING,
+                        TitledBorder.TOP,
+                        new Font("Segoe UI Semibold", Font.BOLD, 14),
+                        new Color(30, 60, 120)
+                ),
+                new EmptyBorder(8, 8, 8, 8)
+        );
+    }
+
+    private void addStudent(ActionEvent e) {
+        String name = nameField.getText().trim();
+        try {
+            int bangla = Integer.parseInt(banglaField.getText().trim());
+            int english = Integer.parseInt(englishField.getText().trim());
+            int math = Integer.parseInt(mathField.getText().trim());
+
+            manager.addStudent(name, bangla, english, math);
+            outputArea.append("✅ Added student: " + name + "\n");
+            updateTable();
+
+            // Clear fields after adding
+            nameField.setText("");
+            banglaField.setText("");
+            englishField.setText("");
+            mathField.setText("");
+
+            addPlaceholder(nameField, "Enter name");
+            addPlaceholder(banglaField, "Bangla marks");
+            addPlaceholder(englishField, "English marks");
+            addPlaceholder(mathField, "Math marks");
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(this, "❗ Please enter valid numeric marks.", "Input Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    private void showHighest(ActionEvent e) {
+        outputArea.append("📊 " + manager.getHighestMarks() + "\n");
+    }
+
+    private void showTopper(ActionEvent e) {
+        outputArea.append("🏆 " + manager.getTopper() + "\n");
+    }
+
+    private void updateTable() {
+        tableModel.setRowCount(0);
+        for (Student s : manager.getAllStudents()) {
+            tableModel.addRow(new Object[]{
+                    s.getName(), s.getBangla(), s.getEnglish(), s.getMath(),
+                    s.totalMarks(), s.averageMarks(), s.getGrade()
+            });
+        }
+    }
+
+    private void saveStudents() {
+        manager.saveToFile(FILE_NAME);
+        outputArea.append(" Saved to " + FILE_NAME + "\n");
+    }
+
+    private void loadStudents() {
+        manager.loadFromFile(FILE_NAME);
+        updateTable();
+        outputArea.append(" Loaded from " + FILE_NAME + "\n");
+    }
+
+    // Rounded border class for buttons
+    static class RoundedBorder extends AbstractBorder {
+        private final int radius;
+        public RoundedBorder(int radius) {
+            this.radius = radius;
+        }
+        @Override
+        public void paintBorder(Component c, Graphics g, int x, int y, int width, int height) {
+            Graphics2D g2 = (Graphics2D) g;
+            g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+            g2.setColor(Color.WHITE);
+            g2.drawRoundRect(x, y, width - 1, height - 1, radius, radius);
+        }
+        @Override
+        public Insets getBorderInsets(Component c) {
+            return new Insets(radius / 2, radius / 2, radius / 2, radius / 2);
+        }
+        @Override
+        public Insets getBorderInsets(Component c, Insets insets) {
+            insets.left = insets.top = insets.right = insets.bottom = radius / 2;
+            return insets;
+        }
+    }
+
+    // Gradient background panel
+    static class GradientPanel extends JPanel {
+        private final Color startColor;
+        private final Color endColor;
+
+        public GradientPanel(Color start, Color end) {
+            this.startColor = start;
+            this.endColor = end;
+            setOpaque(false);
+        }
+
+        @Override
+        protected void paintComponent(Graphics g) {
+            Graphics2D g2d = (Graphics2D) g.create();
+            int w = getWidth();
+            int h = getHeight();
+            GradientPaint gp = new GradientPaint(0, 0, startColor, 0, h, endColor);
+            g2d.setPaint(gp);
+            g2d.fillRect(0, 0, w, h);
+            g2d.dispose();
+            super.paintComponent(g);
+        }
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> new StudentManagerUI().setVisible(true));
     }
 }
