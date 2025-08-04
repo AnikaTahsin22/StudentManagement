@@ -2,9 +2,7 @@ package org.example;
 
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvFileSource;
-import org.junit.jupiter.params.provider.CsvSource;
-import org.junit.jupiter.params.provider.ValueSource;
+import org.junit.jupiter.params.provider.*;
 
 import java.time.Duration;
 import java.util.List;
@@ -109,6 +107,7 @@ void testTimeout(){
 
 
 
+
     @ParameterizedTest
     @CsvSource({
             "Anika, 85, 90, 88",
@@ -135,6 +134,14 @@ void testTimeout(){
 
         assertEquals(name, s.getName());
     }
+    static List<Arguments> studentDataProvider() {
+        return List.of(
+                Arguments.of("Nila", 70, 80, 90),
+                Arguments.of("Rafi", 85, 75, 95),
+                Arguments.of("Tuli", 60, 65, 70)
+        );
+    }
+
 
 
 

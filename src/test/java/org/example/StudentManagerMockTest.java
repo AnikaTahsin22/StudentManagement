@@ -21,25 +21,16 @@ class StudentManagerMockTest {
     MockitoAnnotations.openMocks(this);
 
 }
-@Test
-    void  testMockGetTopper(){
-    when(manager.getTopper()).thenReturn("topper: Bob(273 marks)");
-    String topper=manager.getTopper();
-    assertEquals("topper: Bob(273 marks)",topper);
-    verify(manager).getTopper();
 
 
-
-}
-
-//    @Test
-//    void testHigestMarks()
-//    {
-//        when(manager.getHighestMarks()).thenReturn("A+");
-//        String higest = manager.getHighestMarks();
-//        assertEquals("A+", higest);
-//        verify(manager).getHighestMarks();
-//    }
+    @Test
+    void testHigestMarks()
+    {
+        when(manager.getHighestMarks()).thenReturn("A+");
+        String higest = manager.getHighestMarks();
+        assertEquals("A+", higest);
+        verify(manager).getHighestMarks();
+    }
 
 
 }
