@@ -2,8 +2,11 @@ package org.example;
 
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvFileSource;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import java.time.Duration;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -38,6 +41,14 @@ class StudentManagerTest {
       assertEquals(3,students.size());
 
     }
+    @Test
+    void testNotEqals() {
+        Student s = manager.getAllStudents().get(0);
+        assertNotEquals(100, s.getBangla(), "Bangla mark should not be 100");
+
+    }
+
+
 
     @Test
     void testHighestMarks(){
@@ -64,9 +75,70 @@ class StudentManagerTest {
         Student s3=s1;
         assertSame(s1,s3);
         assertNotSame(s1,s2);
-
-
     }
+    @Test
+    void testNull() {
+        Student s=null;
+        assertNotNull(s);
+    }
+
+    @Test
+    void testNotNull() {
+        Student s=manager.getAllStudents().get(0);
+        assertNotNull(s);
+    }
+
+    @Test
+    void testDoesNotThrow() {
+        assertDoesNotThrow(() -> {
+            manager.addStudent("Samiha", 75, 80, 90);
+        });
+    }
+    @Test
+    void testArrayEquals() {
+        int[] expected = {1, 2, 3};
+        int[] actual = {1, 2, 3};
+        assertArrayEquals(expected, actual);
+    }
+@Test
+void testTimeout(){
+        assertTimeout(Duration.ofMillis(100),()->{
+            manager.getTopper();
+        });
+}
+
+
+
+    @ParameterizedTest
+    @CsvSource({
+            "Anika, 85, 90, 88",
+            "Samiha, 78, 91, 89",
+            "Mahi, 92, 88, 77"
+    })
+    void testCsv(String name, int bangla, int english, int math) {
+        StudentManager manager = new StudentManager();
+        manager.addStudent(name, bangla, english, math);
+
+        Student student = manager.getAllStudents().get(0);
+        assertEquals(name, student.getName());
+        assertEquals(bangla, student.getBangla());
+        assertEquals(english, student.getEnglish());
+        assertEquals(math, student.getMath());
+    }
+
+    @ParameterizedTest
+    @CsvFileSource(resources = "/students.csv", numLinesToSkip = 1)
+    void testFromCsv(String name, int bangla, int english, int math) {
+        StudentManager manager = new StudentManager();
+        manager.addStudent(name, bangla, english, math);
+        Student s = manager.getAllStudents().get(0);
+
+        assertEquals(name, s.getName());
+    }
+
+
+
+
 
 
 
