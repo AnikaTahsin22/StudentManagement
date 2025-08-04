@@ -11,21 +11,18 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 class StudentManagerMockTest {
-@Mock
+    @Mock
     private StudentManager manager;
-@InjectMocks
-    private StudentManager service=new StudentManager();
 
-@BeforeEach
-    void init(){
-    MockitoAnnotations.openMocks(this);
+    @BeforeEach
+    void init() {
+        MockitoAnnotations.openMocks(this);
 
-}
+    }
 
 
     @Test
-    void testHigestMarks()
-    {
+    void testHigestMarks() {
         when(manager.getHighestMarks()).thenReturn("A+");
         String higest = manager.getHighestMarks();
         assertEquals("A+", higest);

@@ -66,6 +66,8 @@ public class StudentManagerUI extends JFrame {
         englishField.setPreferredSize(inputSize);
         mathField.setPreferredSize(inputSize);
 
+
+        //place holder
         addPlaceholder(nameField, "Enter name");
         addPlaceholder(banglaField, "Bangla marks");
         addPlaceholder(englishField, "English marks");

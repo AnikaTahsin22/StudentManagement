@@ -92,12 +92,7 @@ class StudentManagerTest {
             manager.addStudent("Samiha", 75, 80, 90);
         });
     }
-    @Test
-    void testArrayEquals() {
-        int[] expected = {1, 2, 3};
-        int[] actual = {1, 2, 3};
-        assertArrayEquals(expected, actual);
-    }
+
 @Test
 void testTimeout(){
         assertTimeout(Duration.ofMillis(100),()->{
