@@ -129,13 +129,7 @@ void testTimeout(){
 
         assertEquals(name, s.getName());
     }
-    static List<Arguments> studentDataProvider() {
-        return List.of(
-                Arguments.of("Nila", 70, 80, 90),
-                Arguments.of("Rafi", 85, 75, 95),
-                Arguments.of("Tuli", 60, 65, 70)
-        );
-    }
+
 
 
 
