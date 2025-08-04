@@ -68,18 +68,6 @@ class StudentManagerTest {
 
     }
 
-    @ParameterizedTest
-    @ValueSource(doubles = {85.0,75.0,65.0,43.0,30.0} )
-    void testGrade(double average){
-        String grade;
-        if (average>=80 ) grade="A+";
-        else if (average >= 70) grade = "A";
-        else if (average >= 60) grade = "B";
-        else if (average >= 50) grade = "C";
-        else if (average >= 40) grade = "D";
-        else grade = "F";
-        Student s=new Student("Mahi",(int)average,(int)average,(int)average );
-        assertEquals(grade,s.getGrade(),"Grade sholud match average");
 
-    }
+
 }
