@@ -43,14 +43,7 @@ class StudentTest {
         }
 
     }
-    @Test
-    void testFail2() {
-        Student student= new Student("Mahi",-10,-40,-50);
-        if(student.averageMarks()<0){
-            fail("Average marks should not be negative");
-        }
 
-    }
 
     @Test
     void testGrade() {

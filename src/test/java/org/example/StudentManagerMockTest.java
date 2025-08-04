@@ -28,7 +28,18 @@ class StudentManagerMockTest {
     assertEquals("topper: Bob(273 marks)",topper);
     verify(manager).getTopper();
 
+
+
 }
+
+//    @Test
+//    void testHigestMarks()
+//    {
+//        when(manager.getHighestMarks()).thenReturn("A+");
+//        String higest = manager.getHighestMarks();
+//        assertEquals("A+", higest);
+//        verify(manager).getHighestMarks();
+//    }
 
 
 }
